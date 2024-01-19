@@ -8,7 +8,7 @@ const expenses = [
     // Add more expenses as needed
 ];
 
-function ExpenseItem() {
+const ExpenseItem = () => {
     return (
         <div className='expense-item'>
             <h2>Expense item!</h2>
