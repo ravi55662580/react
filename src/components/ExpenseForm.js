@@ -1,59 +1,56 @@
 import React, { useState } from 'react';
 
 const ExpenseForm = ({ onAddExpense }) => {
-  const [title, setTitle] = useState('');
-  const [amount, setAmount] = useState('');
-  const [date, setDate] = useState('');
+  const [enteredTitle, setEnteredTitle] = useState('');
+  const [enteredAmount, setEnteredAmount] = useState('');
+  const [enteredDate, setEnteredDate] = useState('');
 
   const handleTitleChange = (e) => {
     const newTitle = e.target.value;
-    console.log('Title:', newTitle);
-    setTitle(newTitle);
+    setEnteredTitle(newTitle);
   };
 
   const handleAmountChange = (e) => {
     const newAmount = e.target.value;
-    console.log('Amount:', newAmount);
-    setAmount(newAmount);
+    setEnteredAmount(newAmount);
   };
 
   const handleDateChange = (e) => {
     const newDate = e.target.value;
-    console.log('Date:', newDate);
-    setDate(newDate);
+    setEnteredDate(newDate);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const newExpense = {
-      title: title,
-      amount: +amount, // Convert amount to a number
-      date: new Date(date),
+      title: enteredTitle,
+      amount: +enteredAmount, // Convert amount to a number
+      date: new Date(enteredDate),
     };
 
     // Pass the new expense data to the parent component (App.js)
     onAddExpense(newExpense);
 
     // Clear the form fields after submitting
-    setTitle('');
-    setAmount('');
-    setDate('');
+    setEnteredTitle('');
+    setEnteredAmount('');
+    setEnteredDate('');
   };
 
   return (
-    <form onChange={(e) => console.log('Form Changed')}>
+    <form>
       <div>
         <label>Title:</label>
-        <input type="text" value={title} onChange={handleTitleChange} />
+        <input type="text" value={enteredTitle} onChange={handleTitleChange} />
       </div>
       <div>
         <label>Amount:</label>
-        <input type="number" value={amount} onChange={handleAmountChange} />
+        <input type="number" value={enteredAmount} onChange={handleAmountChange} />
       </div>
       <div>
         <label>Date:</label>
-        <input type="date" value={date} onChange={handleDateChange} />
+        <input type="date" value={enteredDate} onChange={handleDateChange} />
       </div>
       <button type="submit" onClick={handleSubmit}>Add Expense</button>
     </form>
