@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const ExpenseForm = () => {
+const ExpenseForm = ({ onAddExpense }) => {
   const [userInput, setUserInput] = useState({
     title: '',
     amount: '',
@@ -22,15 +22,20 @@ const ExpenseForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Create an object based on the user's input
-    const formData = {
+    const newExpense = {
       title: userInput.title,
       amount: userInput.amount,
-      date: userInput.date
+      locationOfExpenditure: 'Unknown',
+      date: new Date(userInput.date)
     };
 
-    // Log the object on the screen (you might want to do something more meaningful)
-    console.log(formData);
+    onAddExpense(newExpense);
+
+    setUserInput({
+      title: '',
+      amount: '',
+      date: ''
+    });
   };
 
   return (
@@ -47,7 +52,7 @@ const ExpenseForm = () => {
         <label>Date:</label>
         <input type="date" value={userInput.date} onChange={handleDateChange} />
       </div>
-      <button type="submit">Submit</button>
+      <button type="submit">Add Expense</button>
     </form>
   );
 };

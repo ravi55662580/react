@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
-import ExpenseItem from './components/ExpenseItem';
 import ExpenseForm from './components/ExpenseForm';
+import ExpenseItem from './components/ExpenseItem';
 
 const App = () => {
-  const [expenses, setExpenses] = useState([]);
-
-  const handleAddExpense = (newExpense) => {
-    setExpenses((prevExpenses) => [...prevExpenses, newExpense]);
+  const [expenses, setExpenses]= useState([]);
+  const addExpenseHandler = (expense) => {
+    setExpenses((prevExpenses) => [...prevExpenses, expense]);
   };
 
   return (
     <div>
-      <ExpenseForm onAddExpense={handleAddExpense} />
-      <ExpenseItem expenses={expenses} />
+      <ExpenseForm onAddExpense={addExpenseHandler}/>
+      <ExpenseItem expenses={expenses}/>
     </div>
   );
 };
