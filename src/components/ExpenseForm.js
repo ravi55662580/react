@@ -1,58 +1,53 @@
 import React, { useState } from 'react';
 
-const ExpenseForm = ({ onAddExpense }) => {
-  const [enteredTitle, setEnteredTitle] = useState('');
-  const [enteredAmount, setEnteredAmount] = useState('');
-  const [enteredDate, setEnteredDate] = useState('');
+const ExpenseForm = () => {
+  const [userInput, setUserInput] = useState({
+    title: '',
+    amount: '',
+    date: ''
+  });
 
-  const handleTitleChange = (e) => {
-    const newTitle = e.target.value;
-    setEnteredTitle(newTitle);
+  const handleTitleChange = (event) => {
+    setUserInput({ ...userInput, title: event.target.value });
   };
 
-  const handleAmountChange = (e) => {
-    const newAmount = e.target.value;
-    setEnteredAmount(newAmount);
+  const handleAmountChange = (event) => {
+    setUserInput({ ...userInput, amount: event.target.value });
   };
 
-  const handleDateChange = (e) => {
-    const newDate = e.target.value;
-    setEnteredDate(newDate);
+  const handleDateChange = (event) => {
+    setUserInput({ ...userInput, date: event.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-    const newExpense = {
-      title: enteredTitle,
-      amount: +enteredAmount, // Convert amount to a number
-      date: new Date(enteredDate),
+    // Create an object based on the user's input
+    const formData = {
+      title: userInput.title,
+      amount: userInput.amount,
+      date: userInput.date
     };
 
-    // Pass the new expense data to the parent component (App.js)
-    onAddExpense(newExpense);
-
-    // Clear the form fields after submitting
-    setEnteredTitle('');
-    setEnteredAmount('');
-    setEnteredDate('');
+    // Log the object on the screen (you might want to do something more meaningful)
+    console.log(formData);
   };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div>
         <label>Title:</label>
-        <input type="text" value={enteredTitle} onChange={handleTitleChange} />
+        <input type="text" value={userInput.title} onChange={handleTitleChange} />
       </div>
       <div>
         <label>Amount:</label>
-        <input type="number" value={enteredAmount} onChange={handleAmountChange} />
+        <input type="number" value={userInput.amount} onChange={handleAmountChange} />
       </div>
       <div>
         <label>Date:</label>
-        <input type="date" value={enteredDate} onChange={handleDateChange} />
+        <input type="date" value={userInput.date} onChange={handleDateChange} />
       </div>
-      <button type="submit" onClick={handleSubmit}>Add Expense</button>
+      <button type="submit">Submit</button>
     </form>
   );
 };
