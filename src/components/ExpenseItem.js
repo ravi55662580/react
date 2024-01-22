@@ -15,6 +15,11 @@ const ExpenseItem = () => {
       updatedExpenses.splice(index, 1);
       setExpenses(updatedExpenses);
     };
+    const handleAmountExpense = (index) => {
+      const updatedExpenses = [...expenses];
+      updatedExpenses[index].amount = 100;
+      setExpenses(updatedExpenses);
+    };
   
     return (
       <div className='expense-item'>
@@ -28,6 +33,8 @@ const ExpenseItem = () => {
               date={expense.date}
             />
             <button onClick={() => handleDeleteExpense(index)}>Delete</button>
+            <button onClick={() => handleAmountExpense(index)}>Change Amount to 100</button>
+
           </div>
         ))}
       </div>
