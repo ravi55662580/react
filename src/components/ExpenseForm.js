@@ -6,15 +6,21 @@ const ExpenseForm = ({ onAddExpense }) => {
   const [date, setDate] = useState('');
 
   const handleTitleChange = (e) => {
-    setTitle(e.target.value);
+    const newTitle = e.target.value;
+    console.log('Title:', newTitle);
+    setTitle(newTitle);
   };
 
   const handleAmountChange = (e) => {
-    setAmount(e.target.value);
+    const newAmount = e.target.value;
+    console.log('Amount:', newAmount);
+    setAmount(newAmount);
   };
 
   const handleDateChange = (e) => {
-    setDate(e.target.value);
+    const newDate = e.target.value;
+    console.log('Date:', newDate);
+    setDate(newDate);
   };
 
   const handleSubmit = (e) => {
@@ -36,7 +42,7 @@ const ExpenseForm = ({ onAddExpense }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onChange={(e) => console.log('Form Changed')}>
       <div>
         <label>Title:</label>
         <input type="text" value={title} onChange={handleTitleChange} />
@@ -49,7 +55,7 @@ const ExpenseForm = ({ onAddExpense }) => {
         <label>Date:</label>
         <input type="date" value={date} onChange={handleDateChange} />
       </div>
-      <button type="submit">Add Expense</button>
+      <button type="submit" onClick={handleSubmit}>Add Expense</button>
     </form>
   );
 };
